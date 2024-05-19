@@ -1,0 +1,11 @@
+<script defer>
+  //For Dropdown menu
+  const dropdownNavbar = document.getElementById("dropdownNavbar");
+  const dropdownNavbarLink = document
+    .getElementById("dropdownNavbarLink")
+    .addEventListener("click", (e) => {
+      console.log("Click Occurred In Button");
+      dropdownNavbar.classList.toggle("hidden");
+      console.log(dropdownNavbar);
+    });
+</script>

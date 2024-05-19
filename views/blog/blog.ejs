@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%-locals.blog.title %></title>
+    <%- include("../partials/style") %> <%- include("../partials/tailwind") %>
+  </head>
+  <body>
+    <%- include("../partials/nav") %>
+    <div class="">
+      <h2 class="text-xl my-2 font-semibold"><%-blog.title %></h2>
+      <img src="<%- blog.coverImage %>" alt="coverImage" width="700" />
+      <article class="my-2"><%- blog.body %></article>
+    </div>
+    <h2 class="text-2xl font-bold text-gray-900 my-3 px-4">
+      Comments (<%- locals.comments.length %>)
+    </h2>
+    <% if (locals.comments.length) { %>
+
+    <div class="flex flex-col gap-2 px-4">
+      <% comments.forEach((comment)=>{%>
+      <div class="flex flex-row gap-4 items-center">
+        <div class="flex flex-row gap-2 items-center">
+          <h3 class="text-lg font-semibold text-center">
+            <%- comment.createdBy.fullName %>
+          </h3>
+          <img
+            src="<%- comment.createdBy.profileImageUrl %>"
+            alt="profile Image"
+            width="30"
+          />
+        </div>
+
+        <p><%- comment.content %></p>
+      </div>
+      <%})%>
+    </div>
+
+    <% } %> <% if (locals.user) { %>
+    <form
+      action="/blog/comment/<%-blog._id %>/"
+      method="post"
+      class="px-4 max-w-[500px]"
+    >
+      <label
+        for="helper-text"
+        class="block mb-2 font-medium text-xl text-gray-900 dark:text-white"
+        >Add Comment</label
+      >
+      <input
+        type="text"
+        id="helper-text"
+        name="comment"
+        aria-describedby="add comment to this post"
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:focus:ring-blue-500 dark:focus:border-blue-500 outline-none"
+        placeholder="Add comment"
+      />
+      <button
+        type="submit"
+        class="my-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+      >
+        Post
+      </button>
+    </form>
+    <% } %> <%- include("../partials/events") %>
+  </body>
+</html>
